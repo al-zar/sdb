@@ -1,0 +1,180 @@
+{
+  "query_block": {
+    "select_id": 1,
+    "cost_info": {
+      "query_cost": "38842081.68"
+    },
+    "duplicates_removal": {
+      "using_temporary_table": true,
+      "using_filesort": false,
+      "windowing": {
+        "windows": [
+          {
+            "name": "<unnamed window>",
+            "using_temporary_table": true,
+            "using_filesort": true,
+            "filesort_key": [
+              "`customer_id`",
+              "`title`"
+            ],
+            "frame_buffer": {
+              "using_temporary_table": true,
+              "optimized_frame_evaluation": true
+            },
+            "functions": [
+              "sum"
+            ]
+          }
+        ],
+        "cost_info": {
+          "sort_cost": "16703445.91"
+        },
+        "nested_loop": [
+          {
+            "table": {
+              "table_name": "f",
+              "access_type": "index",
+              "key": "idx_title",
+              "used_key_parts": [
+                "title"
+              ],
+              "key_length": "514",
+              "rows_examined_per_scan": 1000,
+              "rows_produced_per_join": 1000,
+              "filtered": "100.00",
+              "using_index": true,
+              "cost_info": {
+                "read_cost": "3.00",
+                "eval_cost": "100.00",
+                "prefix_cost": "103.00",
+                "data_read_per_join": "539K"
+              },
+              "used_columns": [
+                "film_id",
+                "title"
+              ]
+            }
+          },
+          {
+            "table": {
+              "table_name": "p",
+              "access_type": "ALL",
+              "rows_examined_per_scan": 16500,
+              "rows_produced_per_join": 16500000,
+              "filtered": "100.00",
+              "using_join_buffer": "hash join",
+              "cost_info": {
+                "read_cost": "71.80",
+                "eval_cost": "1650000.00",
+                "prefix_cost": "1650174.80",
+                "data_read_per_join": "377M"
+              },
+              "used_columns": [
+                "payment_id",
+                "amount",
+                "payment_date"
+              ],
+              "attached_condition": "(cast(`sakila`.`p`.`payment_date` as date) = '2005-07-30')"
+            }
+          },
+          {
+            "table": {
+              "table_name": "r",
+              "access_type": "ref",
+              "possible_keys": [
+                "rental_date",
+                "idx_fk_inventory_id",
+                "idx_fk_customer_id"
+              ],
+              "key": "rental_date",
+              "used_key_parts": [
+                "rental_date"
+              ],
+              "key_length": "5",
+              "ref": [
+                "sakila.p.payment_date"
+              ],
+              "rows_examined_per_scan": 1,
+              "rows_produced_per_join": 16703445,
+              "filtered": "100.00",
+              "using_index": true,
+              "cost_info": {
+                "read_cost": "15469075.48",
+                "eval_cost": "1670344.59",
+                "prefix_cost": "18789594.87",
+                "data_read_per_join": "509M"
+              },
+              "used_columns": [
+                "rental_id",
+                "rental_date",
+                "inventory_id",
+                "customer_id"
+              ]
+            }
+          },
+          {
+            "table": {
+              "table_name": "c",
+              "access_type": "eq_ref",
+              "possible_keys": [
+                "PRIMARY"
+              ],
+              "key": "PRIMARY",
+              "used_key_parts": [
+                "customer_id"
+              ],
+              "key_length": "2",
+              "ref": [
+                "sakila.r.customer_id"
+              ],
+              "rows_examined_per_scan": 1,
+              "rows_produced_per_join": 16703445,
+              "filtered": "100.00",
+              "cost_info": {
+                "read_cost": "4175.86",
+                "eval_cost": "1670344.59",
+                "prefix_cost": "20464115.32",
+                "data_read_per_join": "9G"
+              },
+              "used_columns": [
+                "customer_id",
+                "first_name",
+                "last_name"
+              ]
+            }
+          },
+          {
+            "table": {
+              "table_name": "i",
+              "access_type": "eq_ref",
+              "possible_keys": [
+                "PRIMARY"
+              ],
+              "key": "PRIMARY",
+              "used_key_parts": [
+                "inventory_id"
+              ],
+              "key_length": "3",
+              "ref": [
+                "sakila.r.inventory_id"
+              ],
+              "rows_examined_per_scan": 1,
+              "rows_produced_per_join": 16703445,
+              "filtered": "100.00",
+              "using_index": true,
+              "cost_info": {
+                "read_cost": "4175.86",
+                "eval_cost": "1670344.59",
+                "prefix_cost": "22138635.77",
+                "data_read_per_join": "254M"
+              },
+              "used_columns": [
+                "inventory_id"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}
