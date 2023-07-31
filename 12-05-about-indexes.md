@@ -129,3 +129,4 @@ Wikipedia: Hilbert R-tree
 Методы поиска во внешней памяти
 Артур Фуллер. Intelligent database design using hash keys
 
+web-link: https://habr.com/ru/articles/102785/
