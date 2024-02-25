@@ -80,7 +80,7 @@ wget -qO - https://mirror.g-soft.info/elasticsearch/GPG-KEY-elasticsearch | sudo
 Скачиваем DEB пакет Elasticsearch 8.6 с репозитория elastic
 
 ```
-wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-8.6.2-amd64.deb
+wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-8.12.2-amd64.deb
 ```
 
 Либо скачиваем DEB пакет Elasticsearch 8.6 с зеркала репозитория elastic
