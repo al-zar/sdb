@@ -1,13 +1,16 @@
 # How_to_Install_Elasticsearch_on_Debian_12
 
-Установка Elasticsearch
+# Установка Elasticsearch на Debian 12
 
 <details>
+
+ППП
+
   <summary>
 
-целевая ВМ с ОС Debian 12
+_целевая ВМ с ОС Debian 12_
 
-## Подготовка
+### Первоначальная подготовка
 
   </summary>
 
