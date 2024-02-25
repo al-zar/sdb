@@ -13,40 +13,46 @@ _целевая ВМ с ОС Debian 12_
 
 меняем / устанавливаем hostname
 
+```
 hostnamectl set-hostnmae elk.1103.local
+```
 
 обновляем запись DNS, вносим запись 'ip hostanme' в файл /etc/hosts, если нет своего DNS сервера
 
+```
 echo "192.168.77.114  elk.1103.local  elk" >> /etc/hosts
+```
 
-,где ip адрес получаем из назначенного на интерфейсе, ip a
+_,где ip адрес получаем из назначенного на интерфейсе, 'ip a'_
 
-
-</details>
-
-
-<details>
-  <summary>
 
 ### Установка JRE/JDK
 
-  </summary>
-
-Open JDK 11 по умолчанию поставляется с Debian.
+_Open JDK 11 по умолчанию поставляется с Debian._
 
 Обновляем индекс пакетов командой ниже
 
+```
 sudo apt update
+```
 
 Устанавливаем Java Runtime Environment (JRE)
 
+```
 sudo apt install default-jre
+```
+
+![](./images/elk/elasticsrch_01.png)
 
 В качестве альтернативы, можно использовать Liberica JDK
 
 Проверяем версию Java, что бы убедиться, что установка прошла успешно
 
+```
 java --version
+```
+
+![](./images/elk/elasticsrch_02.png)
 
 </details>
 
