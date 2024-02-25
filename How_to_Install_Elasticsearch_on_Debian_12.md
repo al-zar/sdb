@@ -56,9 +56,25 @@ java --version
 
 </details>
 
+
+## Установка Elasticsearch
+
+<details>
+  <summary>
+
 Устанавливаем GPG ключ elasticsearch
 
+  </summary>
+
+112
+
+  <summary>
+
 Если есть проблемы с доступом к репозиторию Elasticsearch , то можно установить с зеркала
+
+  </summary>
+
+1123
 
 wget -qO - https://mirror.g-soft.info/elasticsearch/GPG-KEY-elasticsearch | sudo gpg --dearmor -o /usr/share/keyrings/elasticsearch-keyring.gpg
 
