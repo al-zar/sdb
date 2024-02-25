@@ -154,10 +154,12 @@ Enter host password for user 'elastic':
 
 </details>
 
+<!--
+
 <details>
   <summary>
 
-<!-- 
+
 
 ## Настройка Elasticsearch
 
