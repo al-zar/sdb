@@ -3,14 +3,11 @@
 # Установка Elasticsearch на Debian 12
 
 <details>
-
-ППП
-
   <summary>
 
-_целевая ВМ с ОС Debian 12_
-
 ### Первоначальная подготовка
+
+_целевая ВМ с ОС Debian 12_
 
   </summary>
 
@@ -24,10 +21,14 @@ echo "192.168.77.114  elk.1103.local  elk" >> /etc/hosts
 
 ,где ip адрес получаем из назначенного на интерфейсе, ip a
 
+
+</details>
+
+
+<details>
   <summary>
 
-## Установка JRE/JDK
-
+### Установка JRE/JDK
 
   </summary>
 
