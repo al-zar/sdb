@@ -1,0 +1,111 @@
+# How_to_Install_Elasticsearch_on_Debian_12
+
+Установка Elasticsearch
+
+<details>
+  <summary>
+
+целевая ВМ с ОС Debian 12
+
+## Подготовка
+
+  </summary>
+
+меняем / устанавливаем hostname
+
+hostnamectl set-hostnmae elk.1103.local
+
+обновляем запись DNS, вносим запись 'ip hostanme' в файл /etc/hosts, если нет своего DNS сервера
+
+echo "192.168.77.114  elk.1103.local  elk" >> /etc/hosts
+
+,где ip адрес получаем из назначенного на интерфейсе, ip a
+
+  <summary>
+
+## Установка JRE/JDK
+
+
+  </summary>
+
+Open JDK 11 по умолчанию поставляется с Debian.
+
+Обновляем индекс пакетов командой ниже
+
+sudo apt update
+
+Устанавливаем Java Runtime Environment (JRE)
+
+sudo apt install default-jre
+
+В качестве альтернативы, можно использовать Liberica JDK
+
+Проверяем версию Java, что бы убедиться, что установка прошла успешно
+
+java --version
+
+</details>
+
+Устанавливаем GPG ключ elasticsearch
+
+Если есть проблемы с доступом к репозиторию Elasticsearch , то можно установить с зеркала
+
+wget -qO - https://mirror.g-soft.info/elasticsearch/GPG-KEY-elasticsearch | sudo gpg --dearmor -o /usr/share/keyrings/elasticsearch-keyring.gpg
+
+Скачиваем DEB пакет Elasticsearch 8.6 с репозитория elastic
+
+wget https://mirror.g-soft.info/elasticsearch/elasticsearch-8.12.2-amd64.deb
+
+Устанавливаем командой ниже
+
+sudo dpkg -i elasticsearch-8.12.2-amd64.deb
+
+Запуск и проверка работы службы Elasticsearch
+
+Добавляем в автоматический запуск и запускаем elastic следующей командой
+
+sudo systemctl enable elasticsearch --now
+
+Проверяем состояние службы
+
+systemctl status elasticsearch
+
+если по каким-либо причинам не получили пароль пользователя elastic при установке
+
+сбрасываем пароль пользователя elastic
+
+sudo /usr/share/elasticsearch/bin/elasticsearch-reset-password -u elastic
+
+проверяем доступ к API, используя пароль полученный выше
+
+curl --cacert /etc/elasticsearch/certs/http_ca.crt -u elastic https://localhost:9200
+
+Должны получить ответ, аналогичный приведенному ниже
+
+root@elk:~# curl --cacert /etc/elasticsearch/certs/http_ca.crt -u elastic https://localhost:9200
+Enter host password for user 'elastic':
+{
+  "name" : "elk.1103.local",
+  "cluster_name" : "elasticsearch",
+  "cluster_uuid" : "ZOlY4UYiQHeTBvM_n9zvbg",
+  "version" : {
+    "number" : "8.12.2",
+    "build_flavor" : "default",
+    "build_type" : "deb",
+    "build_hash" : "48a287ab9497e852de30327444b0809e55d46466",
+    "build_date" : "2024-02-19T10:04:32.774273190Z",
+    "build_snapshot" : false,
+    "lucene_version" : "9.9.2",
+    "minimum_wire_compatibility_version" : "7.17.0",
+    "minimum_index_compatibility_version" : "7.0.0"
+  },
+  "tagline" : "You Know, for Search"
+}
+
+
+https://wiki.crowncloud.net/?How_to_Install_Elasticsearch_on_Debian_12#Configure+Elasticsearch:~:text=service.%0Aroot%40vps%3A~%23-,Configure%20Elasticsearch,-Once%20the%20elasticsearch
+
+</details>
+
+---
+
