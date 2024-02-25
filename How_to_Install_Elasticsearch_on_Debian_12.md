@@ -67,6 +67,10 @@ java --version
 
 Устанавливаем GPG ключ elasticsearch
 
+```
+wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo gpg --dearmor -o /usr/share/keyrings/elasticsearch-keyring.gpg
+```
+
 Если есть проблемы с доступом к репозиторию Elasticsearch , то можно установить с зеркала
 
 ```
@@ -74,6 +78,12 @@ wget -qO - https://mirror.g-soft.info/elasticsearch/GPG-KEY-elasticsearch | sudo
 ```
 
 Скачиваем DEB пакет Elasticsearch 8.6 с репозитория elastic
+
+```
+wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-8.6.2-amd64.deb
+```
+
+Либо скачиваем DEB пакет Elasticsearch 8.6 с зеркала репозитория elastic
 
 ```
 wget https://mirror.g-soft.info/elasticsearch/elasticsearch-8.12.2-amd64.deb
