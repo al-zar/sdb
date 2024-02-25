@@ -56,58 +56,70 @@ java --version
 
 </details>
 
-
-## Установка Elasticsearch
+---
 
 <details>
   <summary>
 
-Устанавливаем GPG ключ elasticsearch
+## Установка Elasticsearch
 
   </summary>
 
-112
-
-  <summary>
+Устанавливаем GPG ключ elasticsearch
 
 Если есть проблемы с доступом к репозиторию Elasticsearch , то можно установить с зеркала
 
-  </summary>
-
-1123
-
+```
 wget -qO - https://mirror.g-soft.info/elasticsearch/GPG-KEY-elasticsearch | sudo gpg --dearmor -o /usr/share/keyrings/elasticsearch-keyring.gpg
+```
 
 Скачиваем DEB пакет Elasticsearch 8.6 с репозитория elastic
 
+```
 wget https://mirror.g-soft.info/elasticsearch/elasticsearch-8.12.2-amd64.deb
+```
 
 Устанавливаем командой ниже
 
+```
 sudo dpkg -i elasticsearch-8.12.2-amd64.deb
+```
+
+![](./images/elk/elasticsrch_03.png)
 
 Запуск и проверка работы службы Elasticsearch
 
 Добавляем в автоматический запуск и запускаем elastic следующей командой
 
+```
 sudo systemctl enable elasticsearch --now
+```
 
 Проверяем состояние службы
 
+```
 systemctl status elasticsearch
+```
 
-если по каким-либо причинам не получили пароль пользователя elastic при установке
+![](./images/elk/elasticsrch_04.png)
+
+_если по каким-либо причинам не получили пароль пользователя elastic при установке_
 
 сбрасываем пароль пользователя elastic
 
+```
 sudo /usr/share/elasticsearch/bin/elasticsearch-reset-password -u elastic
+```
 
 проверяем доступ к API, используя пароль полученный выше
 
+```
 curl --cacert /etc/elasticsearch/certs/http_ca.crt -u elastic https://localhost:9200
+```
 
 Должны получить ответ, аналогичный приведенному ниже
 
+```
 root@elk:~# curl --cacert /etc/elasticsearch/certs/http_ca.crt -u elastic https://localhost:9200
 Enter host password for user 'elastic':
 {
@@ -127,11 +139,48 @@ Enter host password for user 'elastic':
   },
   "tagline" : "You Know, for Search"
 }
-
-
-https://wiki.crowncloud.net/?How_to_Install_Elasticsearch_on_Debian_12#Configure+Elasticsearch:~:text=service.%0Aroot%40vps%3A~%23-,Configure%20Elasticsearch,-Once%20the%20elasticsearch
+```
+![](./images/elk/elasticsrch_05.png)
 
 </details>
+
+<details>
+  <summary>
+
+<!-- 
+
+## Настройка Elasticsearch
+
+  </summary>
+
+Конфигурационный файл elasticsearch.yml
+
+```
+nano /etc/elasticsearch/elasticsearch.yml 
+```
+
+Search for the line that contains network.host, uncomment it, and change the value to 0.0.0.0.
+
+Set the network host to 0.0.0.0 to listen on all interfaces and make it available publicly,
+
+```
+network.host: 0.0.0.0
+```
+
+In case you want to configure this to be private/local to your machine. You will have to set the network.host to 127.0.0.1, so the content is not public.
+
+Add discovery.type: single-node under the discovery section,
+
+```
+discovery.type: single-node
+```
+
+Save and exit the file once modified and restart the Elasticsearch service for the changes to take effect.
+
+```
+systemctl restart elasticsearch
+```
+-->
 
 ---
 
